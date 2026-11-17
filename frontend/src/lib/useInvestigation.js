@@ -74,7 +74,8 @@ export function useInvestigation() {
     busy.current = true;
     dispatch({ type: "start" });
     try {
-      const resp = await fetch("/api/investigate", {
+      const API_BASE = import.meta.env.VITE_API_URL ?? "";
+      const resp = await fetch(`${API_BASE}/api/investigate`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ offer, sender, budget }),

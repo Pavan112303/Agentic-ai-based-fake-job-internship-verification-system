@@ -22,8 +22,10 @@ export default function App() {
   const resultsRef = useRef(null);
   const careerRef = useRef(null);
 
+  const API_BASE = import.meta.env.VITE_API_URL ?? "";
+
   useEffect(() => {
-    fetch("/api/config")
+    fetch(`${API_BASE}/api/config`)
       .then((r) => r.json())
       .then((cfg) => {
         setConfig(cfg);
@@ -40,7 +42,7 @@ export default function App() {
 
   const loadSample = async (name) => {
     try {
-      const r = await fetch(`/api/samples/${name}`);
+      const r = await fetch(`${API_BASE}/api/samples/${name}`);
       if (r.ok) setOffer((await r.json()).text);
     } catch {
       /* samples are optional */

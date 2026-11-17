@@ -1,0 +1,14 @@
+.venv
+.serp_cache
+.env
+*.log
+TOUCHSTONE_BUILD_GUIDE.md
+render.yaml
+frontend/node_modules
+VIDEO_SCRIPT.md
+touchstone/
+__pycache__/
+server.py
+cli.py
+requirements.txt
+samples/
