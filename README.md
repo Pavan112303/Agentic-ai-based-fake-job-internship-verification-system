@@ -639,8 +639,4 @@ This project uses an existing open-source multi-agent job and internship offer i
 
 Retain and comply with the original repository's license and attribution requirements when redistributing or publishing modified source code. Review the original repository and its license file before public release.
 
----
 
-**Project:** Agentic AI Based Fake Job & Internship Verification System  
-**Application:** HireGuard AI  
-**Tagline:** Verify Opportunities. Protect Your Career.
