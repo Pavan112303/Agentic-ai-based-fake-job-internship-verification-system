@@ -23,6 +23,7 @@ from dotenv import load_dotenv
 load_dotenv()
 
 from fastapi import FastAPI, HTTPException, Request  # noqa: E402
+from fastapi.middleware.cors import CORSMiddleware  # noqa: E402
 from fastapi.responses import FileResponse, JSONResponse, StreamingResponse  # noqa: E402
 from fastapi.staticfiles import StaticFiles  # noqa: E402
 from pydantic import BaseModel, Field  # noqa: E402
@@ -44,6 +45,26 @@ _runs: dict[str, list[float]] = defaultdict(list)
 _runs_lock = threading.Lock()
 
 app = FastAPI(title="Touchstone", docs_url=None, redoc_url=None)
+
+# Allow requests from Vercel frontend (and localhost for local dev)
+ALLOWED_ORIGINS = [
+    "https://agentic-ai-based-fake-job-internshi-iota.vercel.app",
+    "http://localhost:5173",
+    "http://localhost:3000",
+    "http://localhost:8000",
+]
+# Also support any Vercel preview URLs via regex-style wildcard
+FRONTEND_ORIGIN = os.getenv("FRONTEND_ORIGIN", "")
+if FRONTEND_ORIGIN:
+    ALLOWED_ORIGINS.append(FRONTEND_ORIGIN)
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=ALLOWED_ORIGINS,
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 
 
 class InvestigateRequest(BaseModel):
